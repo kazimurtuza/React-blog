@@ -1,0 +1,46 @@
+.largcarlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.lrgCardSection {
+  margin-top: 51px;
+}
+.lrgCardSection ul {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 2px 22px;
+}
+
+.lrgCardSection ul li {
+  background-color: #ffffff00;
+  margin-left: 20px;
+}
+.lrgCardSection ul li:nth-child(1)::before {
+  content: "";
+  width: 5px;
+  height: 100%;
+  background-color: #e2e8f0;
+  position: absolute;
+  left: 17px;
+}
+
+.lrgCardSection ul li:nth-child(1) {
+  font-size: 25px;
+  font-weight: bold;
+}
+.lrgCardSection ul li:nth-child(2) {
+  font-size: 0.75rem;
+  padding: 10px 14px;
+  background-color: #e2e8f0;
+  color: #718096;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lrgCardSection ul li:nth-child(2):hover {
+  background: #718096;
+  color: #e2e8f0;
+}

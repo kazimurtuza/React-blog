@@ -1,10 +1,16 @@
 import SearcImput from "../element/Searchinput";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { searchAction } from "../../store";
+import { useDispatch } from "react-redux";
 const SearchList = () => {
+  const dispatch = useDispatch();
+  const closeSrclist = () => {
+    dispatch(searchAction.coleSearch());
+  };
   return (
     <>
       <div className="srclistblur">
-        <span className="crossbtnstyle">
+        <span className="crossbtnstyle" onClick={closeSrclist}>
           <AiFillCloseCircle />
         </span>
         <div className="srclistinput">
