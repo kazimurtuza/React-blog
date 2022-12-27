@@ -3,7 +3,13 @@ import {
   EpisodeLeft,
   EpisodeRight,
 } from "../../style/Episode.style";
+import { useNavigate } from "react-router-dom";
+import { EpisodeBlogNameStyle } from "../../style/EpisodeBlog.style";
 const EpisodeCard = () => {
+  const navigate = useNavigate();
+  const episodeBlogDetail = () => {
+    navigate("/episode-blog-details");
+  };
   return (
     <EposodeStyle>
       <EpisodeLeft>
@@ -12,7 +18,9 @@ const EpisodeCard = () => {
           <img src="https://lh3.googleusercontent.com/-PcDDGh9C6Uk/UUoRYu8TmGI/AAAAAAAAADk/bVCVnUEott4/s1231/2.jpeg.jpg" />
         </div>
 
-        <h3> Markdown Language Sample Blog Post Styling</h3>
+        <EpisodeBlogNameStyle onClick={episodeBlogDetail}>
+          Markdown Language Sample Blog Post Styling
+        </EpisodeBlogNameStyle>
       </EpisodeLeft>
       <EpisodeRight>
         <ul>

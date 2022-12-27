@@ -5,7 +5,9 @@ import LargeCardList from "./frontendPages/LargeCardLinst";
 import EpisodeCardList from "./frontendPages/EpisodeCardList";
 import SmallCardList from "./frontendPages/smallCardList";
 import BlogerBlogList from "./frontendPages/BlogerBlogsList";
-import { createGlobalStyle } from "styled-components";
+import EpisodeBlogDetails from "./frontendPages/EpisodeBlogDetails";
+import HomePage from "./admin/pages/HomePage";
+import CreateBlog from "./admin/pages/blogPost/CreateBlog";
 
 function App() {
   return (
@@ -16,7 +18,13 @@ function App() {
         <Route path="/blog-list" element={<LargeCardList />} />
         <Route path="/episode-list" element={<EpisodeCardList />} />
         <Route path="/small-card-list" element={<SmallCardList />} />
+        <Route
+          path="/episode-blog-details"
+          element={<EpisodeBlogDetails />}
+        ></Route>
         <Route path="/bloger-blog-list" element={<BlogerBlogList />} />
+        <Route path="/admin" element={<HomePage />} />;
+        <Route path="/admin/blog/create" element={<CreateBlog />} />;
       </Routes>
     </>
   );

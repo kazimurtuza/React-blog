@@ -3,6 +3,7 @@ import Container from "../components/frontend/Container";
 import FontImg from "../images/headimg.jpg";
 import BlogerSmallCard from "../components/frontend/BlogerSmallCard";
 import BlogCardSmallWithoutImage from "../components/frontend/SmallCardWithOutImage";
+
 import {
   PageDivider,
   LeftPart,
@@ -12,13 +13,14 @@ import {
   Cardtext,
   HeadDiv,
 } from "../style/BlogDetails.Style";
-const BlogDetails = () => {
+import EpisodeItemListCard from "../components/frontend/EpisodeItemListCard";
+const EpisodeBlogDetails = () => {
   return (
     <PageHeaderFooter>
       <Container>
         <HeadDiv>
           <HeadTitle>
-            Click Markdown Language Sample Blog Post Styling
+            Episode Markdown Language Sample Blog Post Styling
           </HeadTitle>
           <span>
             By <span>Sohag .</span> Published in <span>Travel .</span> May 15,
@@ -40,7 +42,10 @@ const BlogDetails = () => {
             </Cardtext>
           </LeftPart>
           <RightPart>
-            <BlogerSmallCard />
+            <EpisodeItemListCard />
+            <br />
+
+            {/* <BlogerSmallCard /> */}
 
             <BlogCardSmallWithoutImage />
             <BlogCardSmallWithoutImage />
@@ -54,4 +59,4 @@ const BlogDetails = () => {
   );
 };
 
-export default BlogDetails;
+export default EpisodeBlogDetails;

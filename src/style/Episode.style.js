@@ -9,6 +9,7 @@ export const EposodeStyle = styled.div`
   margin: 1rem;
   height: 248px;
   overflow: hidden;
+  background: white;
 
   img {
     width: 100%;

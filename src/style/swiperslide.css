@@ -39,7 +39,7 @@
 }
 
 .swiper {
-  width: 811px;
+  width: 710px;
   border-radius: 28px;
 }
 .swiper-slide {
@@ -75,4 +75,9 @@
   width: 15px;
   background: white;
   border: 1px solid blue;
+}
+
+.swiper {
+  width: 798px;
+  border-radius: 28px;
 }
