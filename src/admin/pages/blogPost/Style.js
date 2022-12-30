@@ -63,3 +63,10 @@ export const ItemContetDiv = styled.div`
   position: relative;
   margin-top: 19px;
 `;
+
+export const UploadedImgae = styled.img`
+  margin-top: -103px;
+  margin-left: -15px;
+  width: 106%;
+  height: 135%;
+`;

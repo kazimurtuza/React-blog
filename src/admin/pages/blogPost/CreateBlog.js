@@ -3,7 +3,6 @@ import {
   TextField,
   Grid,
   Fab,
-  ButtonGroup,
   FormControlLabel,
   Radio,
   RadioGroup,
@@ -20,18 +19,47 @@ import PostImgVdo from "./Post_img_video";
 import { BPCard, BPleft, BPright, DeleteItem, ItemContetDiv } from "./Style";
 import { useEffect } from "react";
 
-const CreateBlog = () => {
-  const editor = useRef(null);
-  const [content, setContent] = useState();
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
-  const [postItem, setPostItem] = useState([]);
+const CreateBlog = () => {
+  const [postItem, setPostItem] = useState([
+    { id: new Date().getTime().toString() },
+  ]);
+
+  var emptyPost = {
+    id: new Date().getTime().toString(),
+    img: "",
+    video: "",
+    txt: "",
+  };
   const [episodStage, setEpisodStage] = useState("new");
 
+  const [blogTxtImg, setBlogTxtImg] = useState([emptyPost]);
+
+  const blogTxtImgList = (data) => {
+    let id = data.id;
+    let newobject = [...blogTxtImg];
+    let findIndex = newobject.findIndex((item) => id === item.id);
+    newobject[findIndex] = data;
+    setBlogTxtImg(newobject);
+
+    console.log(blogTxtImg);
+  };
+
   const addPostSection = () => {
-    setPostItem([...postItem, { id: new Date().getTime().toString() }]);
+    let newEmptyPost = {
+      id: new Date().getTime().toString(),
+      img: "",
+      video: "",
+      txt: "",
+    };
+    setBlogTxtImg((pre) => [...pre, newEmptyPost]);
   };
   const deleteItem = (index) => {
     let updateList = postItem.filter((data) => data.id !== index);
+    let updateblog = blogTxtImg.filter((item) => index !== item.id);
+    setBlogTxtImg(updateblog);
     setPostItem(updateList);
   };
 
@@ -44,6 +72,7 @@ const CreateBlog = () => {
 
   const [dataselect, setdata] = useState(null);
   const [episodType, setEpisodType] = useState("single");
+
   useEffect(() => {
     console.log(dataselect);
   }, [dataselect]);
@@ -74,33 +103,18 @@ const CreateBlog = () => {
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <PostImgVdo />
-              <JoditEditor
-                ref={editor}
-                value={content}
-                // config={config}
-                // tabIndex={1} // tabIndex of textarea
-                // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                onChange={(newContent) => setContent(newContent)}
-              />
-            </Grid>
-            {postItem.map((item) => {
+            {blogTxtImg.map((item) => {
               return (
                 <Grid item sx={{ pt: 10 }} xs={12} key={item.id}>
                   <ItemContetDiv>
                     <DeleteItem onClick={() => deleteItem(item.id)}>
                       <BsXLg />
                     </DeleteItem>
-                    <PostImgVdo />
-
-                    <JoditEditor
-                    // ref={editor}
-                    // value={content}
-                    // config={config}
-                    // tabIndex={1} // tabIndex of textarea
-                    // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                    // onChange={(newContent) => setContent(newContent)}
+                    <PostImgVdo
+                      id={item.id}
+                      inputList={blogTxtImgList}
+                      img={item.img}
+                      video={item.video}
                     />
                   </ItemContetDiv>
                 </Grid>
