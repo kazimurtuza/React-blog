@@ -105,8 +105,20 @@ const Sidebar = () => {
 const linksArray = [
   {
     icon: <AiFillAppstore />,
-    label: "Home",
+    label: "Create Blog",
     to: "/admin/blog/create",
+    notification: 0,
+  },
+  {
+    icon: <AiFillAppstore />,
+    label: "Category",
+    to: "/admin/blog/category",
+    notification: 0,
+  },
+  {
+    icon: <AiFillAppstore />,
+    label: "Subategory",
+    to: "/admin/blog/subcategory",
     notification: 0,
   },
   {

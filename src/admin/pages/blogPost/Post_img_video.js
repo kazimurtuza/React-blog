@@ -8,7 +8,6 @@ import { AiFillFileImage } from "react-icons/ai";
 import { useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import JoditEditor from "jodit-react";
-import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { Modal, Box, Typography } from "@mui/material";
 
@@ -69,21 +68,34 @@ function PostImgVdo(props) {
   };
   const text = (newContent) => {
     txtImg.txt = newContent;
-
     props.inputList(txtImg);
   };
+  let categorystyle = {
+    height: "139px",
+    margintop: "-30px",
+  };
+  let top =
+    props.video === "hidden" ? categorystyle : { height: "", margintop: "" };
+  let [margintp, setmargintp] = useState(top);
 
   return (
     <>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <ButtonGroup disableElevation variant="contained" color="primary">
-          <Button onClick={changeMedia}>Image</Button>
-          <Button onClick={changeMedia}>Video</Button>
-        </ButtonGroup>
-      </Grid>
+      {props.video !== "hidden" ? (
+        <Grid item xs={12} sx={{ mb: 2 }}>
+          <ButtonGroup disableElevation variant="contained" color="primary">
+            <Button onClick={changeMedia}>Image</Button>
+            <Button onClick={changeMedia}>Video</Button>
+          </ButtonGroup>
+        </Grid>
+      ) : (
+        ""
+      )}
+
       <Grid item xs={12}>
         {media ? (
-          <ImageUploadDiv>
+          <ImageUploadDiv
+            style={{ marginTop: top.margintop, height: top.height }}
+          >
             <Fab
               color="primary"
               sx={{ mb: 2 }}
@@ -169,17 +181,21 @@ function PostImgVdo(props) {
           </Button>
         </Box>
       </Modal>
-      <JoditEditor
-        onChange={(newContent) => {
-          text(newContent);
-        }}
-        // ref={editor}
-        // value={content}
-        // config={config}
-        // tabIndex={1} // tabIndex of textarea
-        // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-        // onChange={(newContent) => setContent(newContent)}
-      />
+      {props.video !== "hidden" ? (
+        <JoditEditor
+          onChange={(newContent) => {
+            text(newContent);
+          }}
+          // ref={editor}
+          // value={content}
+          // config={config}
+          // tabIndex={1} // tabIndex of textarea
+          // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+          // onChange={(newContent) => setContent(newContent)}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 }

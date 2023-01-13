@@ -19,9 +19,6 @@ import PostImgVdo from "./Post_img_video";
 import { BPCard, BPleft, BPright, DeleteItem, ItemContetDiv } from "./Style";
 import { useEffect } from "react";
 
-import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
-
 const CreateBlog = () => {
   const [postItem, setPostItem] = useState([
     { id: new Date().getTime().toString() },
@@ -163,6 +160,19 @@ const CreateBlog = () => {
             sx={{ width: "100%", mt: 2, mb: 2 }}
             size="small"
             renderInput={(params) => <TextField {...params} label="Category" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            onChange={(e, v) => setdata(v)}
+            options={objarray}
+            getOptionLabel={(objarray) => objarray.name}
+            sx={{ width: "100%", mt: 2, mb: 2 }}
+            size="small"
+            renderInput={(params) => (
+              <TextField {...params} label="Sub Category" />
+            )}
           />
 
           {episodType === "episod" ? (

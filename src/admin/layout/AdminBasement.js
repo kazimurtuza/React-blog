@@ -6,16 +6,18 @@ import { GlobalStyle } from "../style/globalStyle";
 import { darkTheme, lightTheme } from "../style/theme";
 import { Helmet } from "react-helmet";
 import Layout from "./Layout";
-import { useEffect } from "react";
 import "./customstyle.css";
+import { useStateContext } from "../../contexts/contextProvider";
+import { Navigate, useNavigate } from "react-router-dom";
 export const ThemeContext = React.createContext(null);
 const AdminBasement = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const themeStyle = theme === "light" ? lightTheme : darkTheme;
 
-  useEffect(() => {
-    console.log("reinisialize form admin basement");
-  });
+  const { token, setLoginshow } = useStateContext();
+  if (!token) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ThemeContext.Provider value={{ setTheme, theme }}>
