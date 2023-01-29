@@ -10,6 +10,7 @@ import AvatarEditor from "react-avatar-editor";
 import JoditEditor from "jodit-react";
 import "react-image-crop/dist/ReactCrop.css";
 import { Modal, Box, Typography } from "@mui/material";
+import { useStateContext } from "../../../contexts/contextProvider";
 
 function PostImgVdo(props) {
   const [cropImage, setCropImage] = useState();
@@ -77,6 +78,7 @@ function PostImgVdo(props) {
   let top =
     props.video === "hidden" ? categorystyle : { height: "", margintop: "" };
   let [margintp, setmargintp] = useState(top);
+  const { apiBaseUrl } = useStateContext();
 
   return (
     <>
@@ -186,12 +188,6 @@ function PostImgVdo(props) {
           onChange={(newContent) => {
             text(newContent);
           }}
-          // ref={editor}
-          // value={content}
-          // config={config}
-          // tabIndex={1} // tabIndex of textarea
-          // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-          // onChange={(newContent) => setContent(newContent)}
         />
       ) : (
         ""

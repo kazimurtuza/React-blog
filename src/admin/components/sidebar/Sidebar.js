@@ -25,9 +25,6 @@ const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
   return (
     <SSidbar>
       <SSidebarButton
@@ -50,9 +47,9 @@ const Sidebar = () => {
         />
       </SSearch>
       <SDivider />
-      {linksArray.map(({ label, icon, to, notification }) => (
+      {linksArray.map(({ label, icon, to, notification }, index) => (
         <SLinkContainer
-          key={label}
+          key={index + 1}
           style={!sidebarOpen ? { width: `fit-content` } : {}}
         >
           <SLink to={to}>
@@ -69,8 +66,8 @@ const Sidebar = () => {
         </SLinkContainer>
       ))}
       <SDivider />
-      {linksArray.map(({ label, icon, to, notification }) => (
-        <SLinkContainer key={label}>
+      {linksArray.map(({ label, icon, to, notification }, index) => (
+        <SLinkContainer key={index + 1}>
           <SLink to={to}>
             <SLinkIcon>{icon}</SLinkIcon>
             {sidebarOpen && (

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useStateContext } from "./contexts/contextProvider";
 const axiosClient = axios.create({
   baseURL: "http://127.0.0.1:8000/api",
 });
@@ -18,6 +19,9 @@ axiosClient.interceptors.response.use(
       if (response.status === 401) {
         //    401 Unauthorized;
         localStorage.removeItem("ACCESS_TOKEN");
+      }
+      if (response.status === 405) {
+        alert("Method Not Allowed");
       }
     } catch (e) {
       console.error(e);
