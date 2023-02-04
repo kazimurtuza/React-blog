@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import BlogCard from "./BlogCard";
 import Sectionhead from "../element/SectionHead";
 import "../../style/LargeBlogCardSection.css";
-const LargeBlogCardSection = () => {
+const LargeBlogCardSection = (props) => {
   const navigate = useNavigate();
+  const dataList = props.data ? props.data : [];
   const showAllData = () => {
     navigate("/blog-list");
   };
@@ -18,12 +19,10 @@ const LargeBlogCardSection = () => {
       </Sectionhead>
 
       <div className="largcarlist">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {}
+        {dataList.map((data) => (
+          <BlogCard data={data} />
+        ))}
       </div>
     </div>
   );

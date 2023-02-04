@@ -7,22 +7,32 @@ import {
   CardTitle,
 } from "../../style/BlogCardSmallWithoutImage.style";
 import { useNavigate } from "react-router-dom";
-const BlogCardSmallWithoutImage = () => {
+const BlogCardSmallWithoutImage = (props) => {
   const navigate = useNavigate();
-  const BlogDetails = () => {
-    navigate("/blogdetails");
+
+  const selecBlog = (id) => {
+    props.selectBlog(id);
   };
+  const data = {
+    id: props.data.id,
+    title: props.data.title,
+    blogger: props.data.bloggerInfo.name,
+    publish_time: props.data.publish_time,
+  };
+  const active =
+    props.activeId === data.id ? { borderLeftColor: "#084dfc" } : {};
+  const activeText = props.activeId === data.id ? { color: "#084dfc" } : {};
   return (
     <>
-      <BlogCard>
+      <BlogCard style={active}>
         <Cardbody>
-          <span onClick={BlogDetails}>
-            Markdown is a lightweight markup language with
+          <span style={activeText} onClick={() => selecBlog(data.id)}>
+            {data.title}
           </span>
 
           <Cardfooter>
-            <Name>Kazi</Name>
-            <Date>April 16, 2020 1 min</Date>
+            <Name>{data.blogger}</Name>
+            <Date>{data.publish_time} 1 min</Date>
           </Cardfooter>
         </Cardbody>
       </BlogCard>

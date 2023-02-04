@@ -16,7 +16,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/blogdetails" element={<BlogDetails />} />
+        <Route path="/blogdetails/:blogId" element={<BlogDetails />} />
         <Route path="/blog-list" element={<LargeCardList />} />
         <Route path="/episode-list" element={<EpisodeCardList />} />
         <Route path="/small-card-list" element={<SmallCardList />} />

@@ -9,7 +9,10 @@ import {
 } from "../../style/BloogerSmallCard.style";
 import { BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
 import MenImg from "../../images/men.jpg";
-const BlogerSmallCard = () => {
+const BlogerSmallCard = (props) => {
+  const data = {
+    name: props.data.name,
+  };
   return (
     <>
       <Cardstyle>
@@ -18,8 +21,8 @@ const BlogerSmallCard = () => {
           <img width="100%" src={MenImg} alt="" />
         </Roundimgdiv>
         <Bodydiv>
-          <Name>kazimurtuza</Name>
-          <Work>Bloger</Work>
+          <Name>{data.name}</Name>
+          <Work>Blogger</Work>
           <Social>
             <ul>
               <li>

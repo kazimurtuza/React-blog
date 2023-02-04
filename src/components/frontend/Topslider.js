@@ -9,11 +9,16 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
 import "../../style/swiperslide.css";
+import { useStateContext } from "../../contexts/contextProvider";
 
 // import required modules
 import { Pagination } from "swiper";
+import { Link } from "react-router-dom";
 
-export default function Topslider() {
+export default function Topslider(props) {
+  const { apiBaseUrl } = useStateContext();
+  const postLIst = props.post ? props.post : [];
+
   return (
     <>
       <div>
@@ -27,19 +32,14 @@ export default function Topslider() {
           autoplay={true}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <img src="https://lh3.googleusercontent.com/-PcDDGh9C6Uk/UUoRYu8TmGI/AAAAAAAAADk/bVCVnUEott4/s1231/2.jpeg.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://cdn.aarp.net/content/dam/aarp/home-and-family/family-and-friends/2020/08/1140-panda-smithsonian-esp.jpg" />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <img src="https://azertag.az/files/2020/3/1200x630/16005083856299144853_1200x630.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://lh3.googleusercontent.com/-PcDDGh9C6Uk/UUoRYu8TmGI/AAAAAAAAADk/bVCVnUEott4/s1231/2.jpeg.jpg" />
-          </SwiperSlide>
+          {postLIst.map((data) => (
+            <SwiperSlide className="sliderDiv">
+              <Link className="slideBlogtitle" to={`/blogdetails/${data.id}`}>
+                <span>{data.title}</span>
+              </Link>
+              <img src={`${apiBaseUrl}${data.image}`} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </>
