@@ -28,9 +28,13 @@ const BlogCard = (props) => {
         <div className="blogBody">
           <span className="cardtag">{category}</span>
           <Link to={`/blogdetails/${blogId}`}>
-            <h3 className="blogtitle">{title}</h3>
+            <h3 className="blogtitle">
+              {title.length > 55 ? title.slice(0, 55) + " ..." : title}
+            </h3>
           </Link>
-          <p>{details} ...</p>
+          <p className="blogdsc">
+            {details.length > 200 ? details.slice(0, 200) + "..." : details}
+          </p>
         </div>
         <div className="cardfooter">
           <div>

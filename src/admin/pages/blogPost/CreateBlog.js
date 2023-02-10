@@ -60,6 +60,7 @@ const CreateBlog = () => {
   const [episodList, setEpisodList] = useState([]);
   const [episodNo, setepisodNo] = useState(0);
   const [totalEp, settotalEp] = useState(0);
+  const [isold, setIsold] = useState(0);
 
   const blogTxtImgList = (data) => {
     let id = data.id;
@@ -113,6 +114,7 @@ const CreateBlog = () => {
       post_details: firstpart.txt,
       category_id: categoryId,
       sub_category_id: subCategoryId,
+      episode_no: totalEp,
     };
     console.log(updatesetdata);
 
@@ -266,15 +268,13 @@ const CreateBlog = () => {
                 setSendabledata((pre) => ({
                   ...pre,
                   post_type: 1,
-                  category_id: null,
-                  sub_category_id: null,
                 }))
               }
               control={<Radio color="primary" />}
               label="Episod"
             />
           </RadioGroup>
-          {sendableData.post_type === 0 && (
+          {isold === 0 && (
             <Box>
               <Autocomplete
                 disablePortal
@@ -329,9 +329,13 @@ const CreateBlog = () => {
                     control={<Radio color="primary" />}
                     // onChange={(e, v) => setEpisodStage("new")}
                     onChange={(e, v) => {
+                      setIsold(0);
+                      settotalEp(1);
                       setSendabledata((pre) => ({
                         ...pre,
                         episode_no: 1,
+                        category_id: null,
+                        sub_category_id: null,
                       }));
                     }}
                     label="New create"
@@ -342,9 +346,12 @@ const CreateBlog = () => {
                     // onChange={(e, v) => setEpisodStage("old")}
                     onChange={(e, v) => {
                       getEpisodList();
+                      setIsold(1);
                       setSendabledata((pre) => ({
                         ...pre,
                         episode_no: 0,
+                        category_id: null,
+                        sub_category_id: null,
                       }));
                     }}
                     control={<Radio color="primary" />}

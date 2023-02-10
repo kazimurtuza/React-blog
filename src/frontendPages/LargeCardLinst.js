@@ -8,7 +8,21 @@ import {
 } from "../style/PageHeadText.Style";
 
 import BlogCard from "./../components/frontend/BlogCard";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axiosClient from "./../axios-client";
 const LargeCardList = () => {
+  let paramData = useParams();
+  let [blogList, setblogList] = useState([]);
+
+  useEffect(() => {
+    paramData.categoryOrType === "recent" &&
+      axiosClient
+        .get("post/recent/blog")
+        .then(({ data }) => setblogList(data.data));
+    console.log(blogList);
+  }, []);
+
   return (
     <PageHeaderFooter>
       <Container>
@@ -20,14 +34,9 @@ const LargeCardList = () => {
           </PageSubtitle>
         </PageHeadDiv>
         <CardRow>
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {blogList.map((data, index) => (
+            <BlogCard key={index} data={data} />
+          ))}
         </CardRow>
       </Container>
     </PageHeaderFooter>

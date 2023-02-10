@@ -3,7 +3,7 @@ import BlogCard from "./BlogCard";
 import BlogCardSmall from "./BlogcardSmall";
 import Sectionhead from "../element/SectionHead";
 import "../../style/LargeBlogCardSection.css";
-const LargeSmallCardSection = () => {
+const LargeSmallCardSection = (props) => {
   return (
     <div className="lrgCardSection">
       <Sectionhead>
@@ -14,13 +14,15 @@ const LargeSmallCardSection = () => {
       </Sectionhead>
 
       <div className="largcarlist">
-        <BlogCard />
+        <BlogCard data={props.data[0]} />
         <div>
-          <BlogCardSmall />
-          <BlogCardSmall />
-          <BlogCardSmall />
+          {props.data.map(
+            (data, index) =>
+              index > 0 && index < 4 && <BlogCardSmall post={data} />
+          )}
         </div>
-        <BlogCard />
+
+        <BlogCard data={props.data[4]} />
       </div>
     </div>
   );

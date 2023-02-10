@@ -85,3 +85,19 @@ export const EpisodeListTitlebottom = styled.h3`
   width: 100%;
   background: white;
 `;
+
+export const EpisodeListdiv = styled.div`
+  display: flex;
+`;
+export const EpisodeLeft = styled.div`
+  flex-basis: 30%;
+  border-radius: 10px;
+  img {
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+  }
+`;
+export const EpisodeRight = styled.div`
+  flex-basis: 70%;
+`;

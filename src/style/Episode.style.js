@@ -22,7 +22,6 @@ export const EposodeStyle = styled.div`
 // export const EpisodeLeft = styled.div``;
 export const EpisodeRight = styled.div`
   border-radius: 15px 15px 15px 15px;
-  padding: 0px 10px;
   color: red;
   overflow-y: auto;
   /* width */

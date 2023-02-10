@@ -3,11 +3,12 @@ import BlogCardSmall from "./BlogcardSmall";
 import Sectionhead from "../element/SectionHead";
 import { useNavigate } from "react-router-dom";
 import "../../style/LargeBlogCardSection.css";
-const SmallBlogCardSection = () => {
+const SmallBlogCardSection = (props) => {
   const navigate = useNavigate();
   const smallCardListView = () => {
     navigate("/small-card-list");
   };
+
   return (
     <div className="lrgCardSection">
       <Sectionhead>
@@ -18,12 +19,9 @@ const SmallBlogCardSection = () => {
       </Sectionhead>
 
       <div className="largcarlist">
-        <BlogCardSmall />
-        <BlogCardSmall />
-        <BlogCardSmall />
-        <BlogCardSmall />
-        <BlogCardSmall />
-        <BlogCardSmall />
+        {props.data.map((data) => (
+          <BlogCardSmall post={data} />
+        ))}
       </div>
     </div>
   );

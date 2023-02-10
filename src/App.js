@@ -17,11 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blogdetails/:blogId" element={<BlogDetails />} />
-        <Route path="/blog-list" element={<LargeCardList />} />
+        <Route path="/blog-list/:categoryOrType" element={<LargeCardList />} />
         <Route path="/episode-list" element={<EpisodeCardList />} />
         <Route path="/small-card-list" element={<SmallCardList />} />
         <Route
-          path="/episode-blog-details"
+          path="/episode-blog-details/:episode_id/:child_episode_id"
           element={<EpisodeBlogDetails />}
         ></Route>
         <Route path="/bloger-blog-list" element={<BlogerBlogList />} />

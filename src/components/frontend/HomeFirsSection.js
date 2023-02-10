@@ -13,14 +13,31 @@ import axiosClient from "./../../axios-client";
 
 const HomeFirstSection = () => {
   const [firstSecSmBlg, setFirstSecSmBog] = useState([]);
-  const [secondSecBog, setSecondSecBog] = useState([]);
   const [firstSlider, setFirstSlider] = useState([]);
+  const [secondSecBog, setSecondSecBog] = useState([]);
+  const [episodelist, setEpisode] = useState([]);
+
+  const [fifthSection, setfifthSection] = useState([]);
+  const [sixthSection, setsixthSection] = useState([]);
   useEffect(() => {
     axiosClient.get("home/post/first/section/get").then(({ data }) => {
       setFirstSecSmBog(data.first_section);
-      setSecondSecBog(data.second_section);
       setFirstSlider(data.slider_data);
-      console.log(data.first_section);
+    });
+
+    axiosClient.get("home/post/second/section/get").then(({ data }) => {
+      setSecondSecBog(data);
+    });
+
+    axiosClient.get("home/post/fourth/section/get").then(({ data }) => {
+      setEpisode(data);
+    });
+
+    axiosClient.get("home/post/fifth/section/get").then(({ data }) => {
+      setfifthSection(data);
+    });
+    axiosClient.get("home/post/sixth/section/get").then(({ data }) => {
+      setsixthSection(data);
     });
   }, []);
 
@@ -51,9 +68,9 @@ const HomeFirstSection = () => {
       <div>
         <LargeBlogCardSection data={secondSecBog} />
       </div>
-      <EposodeBlogCardSection />
-      <SmallBlogCardSection />
-      <LargeSmallCardSection />
+      <EposodeBlogCardSection data={episodelist} />
+      <SmallBlogCardSection data={fifthSection} />
+      <LargeSmallCardSection data={sixthSection} />
     </>
   );
 };

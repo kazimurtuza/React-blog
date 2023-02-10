@@ -33,9 +33,9 @@ export default function Topslider(props) {
           className="mySwiper"
         >
           {postLIst.map((data) => (
-            <SwiperSlide className="sliderDiv">
+            <SwiperSlide className="sliderDiv" key={data.id}>
               <Link className="slideBlogtitle" to={`/blogdetails/${data.id}`}>
-                <span>{data.title}</span>
+                <span>{data.title.slice(0, 40)} ...</span>
               </Link>
               <img src={`${apiBaseUrl}${data.image}`} />
             </SwiperSlide>

@@ -5,66 +5,38 @@ import {
   ItemNumber,
   EpisodeListTitle,
   EpisodeListTitlebottom,
+  EpisodeListdiv,
+  EpisodeLeft,
+  EpisodeRight,
 } from "./../../style/EpisodeItemListCard.style";
-const EpisodeItemListCard = () => {
+import { useStateContext } from "../../contexts/contextProvider";
+const EpisodeItemListCard = (props) => {
+  let { apiBaseUrl } = useStateContext();
+  const selecBlog = (id) => {
+    props.selectBlog(id);
+  };
   return (
     <EpisodeListCard>
       <EpisodeListTitle>
         Episode List
         <br />
-        <span>70</span>
+        <span>{props.data.length}</span>
       </EpisodeListTitle>
       <EpisodeListCardWroper>
         <EpisodeListCardUl>
-          <li>
-            <ItemNumber>1</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>2</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>3</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>4</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>5</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>6</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
-          <li>
-            <ItemNumber>7</ItemNumber>
-            <span>
-              Markdown is a lightweight markup language with
-              plain-text-formatting
-            </span>
-          </li>
+          {props.data.map((data) => (
+            <li key={data.id} onClick={() => selecBlog(data.id)}>
+              <ItemNumber>{data.episode_no}</ItemNumber>
+              <EpisodeListdiv>
+                <EpisodeLeft>
+                  <img src={`${apiBaseUrl}${data.image}`} alt="" />
+                </EpisodeLeft>
+                <EpisodeRight>
+                  <span>{data.title}</span>
+                </EpisodeRight>
+              </EpisodeListdiv>
+            </li>
+          ))}
         </EpisodeListCardUl>
       </EpisodeListCardWroper>
       <EpisodeListTitlebottom></EpisodeListTitlebottom>

@@ -26,21 +26,19 @@ const BlogDetails = () => {
   let [blogdetails, setBlogDetails] = useState([]);
   let [relatedBlog, setRelatedBlog] = useState([]);
   let [activeBlogId, setActiveBlogId] = useState(0);
-  console.log(params.blogId);
+
   useEffect(() => {
     getDetails(params.blogId);
   }, []);
-  const getDetails = async (id) => {
+
+  const getDetails = (id) => {
     setActiveBlogId(id);
-    await axiosClient
-      .get(`/single/blog/details?blog_id=${id}`)
-      .then(({ data }) => {
-        console.log(data);
-        setBlogDetails(data.data);
-        setblogSection(data.data.blogSection);
-        setbloggerInfo(data.data.bloggerInfo);
-        relatedPost(data.data.category_id);
-      });
+    axiosClient.get(`/single/blog/details?blog_id=${id}`).then(({ data }) => {
+      setBlogDetails(data.data);
+      setblogSection(data.data.blogSection);
+      setbloggerInfo(data.data.bloggerInfo);
+      relatedPost(data.data.category_id);
+    });
   };
   const silectedBlogdetails = (id) => {
     getDetails(id);
@@ -49,7 +47,6 @@ const BlogDetails = () => {
     await axiosClient
       .get(`/single/related/blog?category_id=${categoryId}`)
       .then(({ data }) => {
-        console.log(data);
         setRelatedBlog(data);
       });
   };

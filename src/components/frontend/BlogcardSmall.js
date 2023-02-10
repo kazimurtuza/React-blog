@@ -10,8 +10,6 @@ const BlogCardSmall = (props) => {
   const bloggerName = props.post ? props.post.bloggerInfo.name : "";
   const publishTime = props.post ? props.post.publish_time : "";
 
-  console.log(postTitle);
-
   const { apiBaseUrl } = useStateContext();
   const navigate = useNavigate();
   const BlogDetails = () => {
@@ -27,12 +25,12 @@ const BlogCardSmall = (props) => {
         <div className="imageDiv">
           <img src={`${apiBaseUrl}${postImg}`} />
         </div>
-        <div className="blogBody">
+        <div className="blogBodysm">
           <span className="cardtag">{category}</span>
           {/* <Link to="/blogdetails/sdf">dgfdgdf</Link> */}
           <Link to={`/blogdetails/${postId}`}>
             <h3 className="blogtitle" onClick={BlogDetails}>
-              {postTitle}
+              {postTitle.slice(0, 45)} ...
             </h3>
           </Link>
           <br />

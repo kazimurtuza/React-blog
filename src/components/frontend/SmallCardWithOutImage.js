@@ -5,16 +5,22 @@ import {
   Name,
   Date,
   CardTitle,
+  ImageTitleDiv,
+  ImageDiv,
+  TitleDiv,
 } from "../../style/BlogCardSmallWithoutImage.style";
+import { useStateContext } from "../../contexts/contextProvider";
 import { useNavigate } from "react-router-dom";
 const BlogCardSmallWithoutImage = (props) => {
   const navigate = useNavigate();
+  const { apiBaseUrl } = useStateContext();
 
   const selecBlog = (id) => {
     props.selectBlog(id);
   };
   const data = {
     id: props.data.id,
+    image: props.data.image,
     title: props.data.title,
     blogger: props.data.bloggerInfo.name,
     publish_time: props.data.publish_time,
@@ -24,16 +30,22 @@ const BlogCardSmallWithoutImage = (props) => {
   const activeText = props.activeId === data.id ? { color: "#084dfc" } : {};
   return (
     <>
-      <BlogCard style={active}>
+      <BlogCard style={active} onClick={() => selecBlog(data.id)}>
         <Cardbody>
-          <span style={activeText} onClick={() => selecBlog(data.id)}>
-            {data.title}
-          </span>
-
-          <Cardfooter>
-            <Name>{data.blogger}</Name>
-            <Date>{data.publish_time} 1 min</Date>
-          </Cardfooter>
+          <ImageTitleDiv>
+            <ImageDiv>
+              <img width={"100px"} src={`${apiBaseUrl}${data.image}`} alt="" />
+            </ImageDiv>
+            <TitleDiv>
+              <span style={activeText}>
+                {data.title.length > 39
+                  ? data.title.slice(0, 39) + "..."
+                  : data.title}
+              </span>
+              <br />
+              <Date>{data.publish_time} 1 min</Date>
+            </TitleDiv>
+          </ImageTitleDiv>
         </Cardbody>
       </BlogCard>
     </>

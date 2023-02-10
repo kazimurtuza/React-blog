@@ -3,58 +3,60 @@ import {
   EpisodeLeft,
   EpisodeRight,
 } from "../../style/Episode.style";
+import { useStateContext } from "../../contexts/contextProvider";
 import { useNavigate } from "react-router-dom";
-import { EpisodeBlogNameStyle } from "../../style/EpisodeBlog.style";
-const EpisodeCard = () => {
+import {
+  EpisodeBlogNameStyle,
+  EpisodeBlogtitleStyle,
+  EpisodeImage,
+  EpisodeTitle,
+} from "../../style/EpisodeBlog.style";
+import { Link } from "react-router-dom";
+const EpisodeCard = (props) => {
+  const { apiBaseUrl } = useStateContext();
   const navigate = useNavigate();
-  const episodeBlogDetail = () => {
-    navigate("/episode-blog-details");
-  };
+
+  const image = props.data.image;
+  const title = props.data.title;
+  const episode_list = props.data.episode_list;
+  const id = props.data.id;
   return (
     <EposodeStyle>
       <EpisodeLeft>
         <div>
           {" "}
-          <img src="https://lh3.googleusercontent.com/-PcDDGh9C6Uk/UUoRYu8TmGI/AAAAAAAAADk/bVCVnUEott4/s1231/2.jpeg.jpg" />
+          <img src={`${apiBaseUrl}${image}`} />
         </div>
 
-        <EpisodeBlogNameStyle onClick={episodeBlogDetail}>
-          Markdown Language Sample Blog Post Styling
-        </EpisodeBlogNameStyle>
+        <Link to={`/episode-blog-details/${id}/0`}>
+          <EpisodeBlogNameStyle>
+            {title.length > 50 ? title.slice(0, 50) + " ..." : title}
+          </EpisodeBlogNameStyle>
+        </Link>
       </EpisodeLeft>
       <EpisodeRight>
         <ul>
-          <li>
-            <span>1</span>
-            <p> Markdown Language Sample Blog Post Styling</p>
-          </li>
-          <li>
-            <span>100</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>30</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>4</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>5</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>6</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>1</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>1</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>1</span> Markdown Language Sample Blog Post Styling
-          </li>
-          <li>
-            <span>1</span> Markdown Language Sample Blog Post Styling
-          </li>
+          {episode_list.map((data) => (
+            <Link
+              key={data.id}
+              to={`/episode-blog-details/${data.blog_id_no}/${data.id}`}
+            >
+              <li>
+                <span>{data.episode_no}</span>
+
+                <EpisodeBlogtitleStyle>
+                  <EpisodeImage>
+                    <img height={"50px"} src={`${apiBaseUrl}${image}`} alt="" />
+                  </EpisodeImage>
+                  <EpisodeTitle>
+                    {data.title.length > 50
+                      ? data.title.slice(0, 45) + " ..."
+                      : data.title}
+                  </EpisodeTitle>
+                </EpisodeBlogtitleStyle>
+              </li>
+            </Link>
+          ))}
         </ul>
       </EpisodeRight>
     </EposodeStyle>
